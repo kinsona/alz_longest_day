@@ -3,9 +3,15 @@
   <%= f.hidden_field :story_id %>
   <%= f.hidden_field :user_one_id %>
 
-  <%= fields_for :message, @message do |message_fields| %>
+  <%= f.fields_for :messages do |message_fields| %>
     <%= message_fields.label :body, "Add a message" %>
     <%= message_fields.text_field :body %>
+
+    <%= message_fields.fields_for :resource do |resource_fields| %>
+      <%= resource_fields.label :body, "Send a link" %>
+      <%= resource_fields.text_field :body %>
+    <% end %>
+
   <% end %>
   
   <%= f.submit 'Send!' %>
