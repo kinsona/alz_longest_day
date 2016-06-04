@@ -1,0 +1,13 @@
+<%= form_for @conversation do |f| %>
+
+  <%= f.hidden_field :story_id %>
+  <%= f.hidden_field :user_one_id %>
+
+  <%= fields_for :message, @message do |message_fields| %>
+    <%= message_fields.label :body, "Add a message" %>
+    <%= message_fields.text_field :body %>
+  <% end %>
+  
+  <%= f.submit 'Send!' %>
+
+<% end %>

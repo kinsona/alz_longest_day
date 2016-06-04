@@ -17,6 +17,15 @@ Conversation.delete_all
 Message.delete_all
 
 
+User.create(email: "foo@bar.com",
+  password: "password",
+  password_confirmation: "password",
+  age: 65, 
+  zip_code: 11111, 
+  relationship: "spouse", 
+  stage: "middle")
+
+
 SEED_MULTIPLIER.times do |i|
   u = User.new
   u.email = "caregiver#{i}@email.com"
@@ -28,6 +37,7 @@ SEED_MULTIPLIER.times do |i|
   stage = "middle"
   u.save!
 end
+
 
 User.all.each do |user|
   # create 0-5 stories

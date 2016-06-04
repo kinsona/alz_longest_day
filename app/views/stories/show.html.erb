@@ -1,0 +1,20 @@
+<h2>Story by <%= @story.user.email %></h2>
+
+<p><%= @story.body %></p>
+
+
+<% if @story.resources.count > 0 %>
+
+  <h4>Resources:</h4>
+  <ul>
+    <% @story.resources.each do |resource| %>
+      <li>
+        <%= link_to resource.body %> - <%= time_ago_in_words(resource.created_at) %> ago
+      </li>
+    <% end %>
+  </ul>
+    
+
+<% end %>
+
+<%= link_to 'Send a response', new_conversation_path(story_id: @story.id, story_author_id: @story.user.id) %>
