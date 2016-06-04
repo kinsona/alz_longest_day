@@ -1,0 +1,11 @@
+<h1>All Conversations</h1>
+
+<% @conversations.each do |convo| %>
+  <%= link_to convo do %>
+    <h4><%= convo.messages.last.user.email %> <small><%= time_ago_in_words(convo.messages.last.created_at) %> ago</small></h4>
+    <p>
+      <%= convo.messages.last.body %>
+    </p>
+  <% end %>
+<% end %>
+

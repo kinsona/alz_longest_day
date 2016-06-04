@@ -7,4 +7,14 @@ class Conversation < ActiveRecord::Base
 
   accepts_nested_attributes_for :messages
 
+
+  def partner(current_user_id)
+    [self.user_one, self.user_two].select { |x| x.id != current_user_id }.first
+  end
+
+
+  def latest_message_datetime
+    self.messages.last.created_at
+  end
+
 end

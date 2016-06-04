@@ -25,10 +25,14 @@ class ConversationsController < ApplicationController
 
 
   def index
+    @conversations = Conversation.where('user_one_id = ? OR user_two_id = ?', current_user.id, current_user.id).sort {|a, b| b.latest_message_datetime <=> a.latest_message_datetime }
   end
 
 
   def show
+    @conversation = Conversation.find(params[:id])
+    @messages = @conversation.messages.where('id IS NOT NULL').order(:created_at => :desc)
+    @new_message = @conversation.messages.build(user: current_user)
   end
 
 

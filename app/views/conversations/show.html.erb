@@ -1,0 +1,25 @@
+<h1>Conversation with <%= @conversation.partner(current_user.id).email %></h1>
+
+<% @messages.each do |message| %>
+
+  <h2><%= message.user.email %></h2>
+  <p>
+    <%= message.body %><br>
+    <%= time_ago_in_words(message.created_at) %> ago
+  </p>
+
+<% end %>
+
+
+<h4>
+  Reply:
+</h4>
+
+<%= form_for @new_message do |f| %>
+  <%= f.hidden_field :conversation_id %>
+
+  <%= f.text_area :body %>
+
+  <%= f.submit 'Send!' %>
+
+<% end %>
