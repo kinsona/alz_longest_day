@@ -3,6 +3,8 @@
 <h1>All Stories</h1>
 
 <% @stories.each do |story| %>
-  <h2>From <%= story.user.email %></h2>
-  <p><%= story.body %></p>
+  <%= link_to story do %>
+    <h2>From <%= story.user.email %></h2>
+    <p><%= story.body %></p>
+  <% end %>
 <% end %>

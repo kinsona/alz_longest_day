@@ -6,11 +6,13 @@
   <%= f.fields_for :messages do |message_fields| %>
     <%= message_fields.label :body, "Add a message" %>
     <%= message_fields.text_field :body %>
+    <br>
 
     <%= message_fields.fields_for :resource do |resource_fields| %>
       <%= resource_fields.label :body, "Send a link" %>
       <%= resource_fields.text_field :body %>
     <% end %>
+    <br>
 
   <% end %>
   
