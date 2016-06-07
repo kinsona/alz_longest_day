@@ -54,7 +54,7 @@ Story.all.each do |story|
     responders.each do |responder|
       convo = story.conversations.create!(user_one: story.user, user_two: responder)
       msg = convo.messages.create!(user: responder, body: "This link is real awesome!")
-      msg.create_resource!(body: "https://www.realawesomelink.com", story: story)
+      msg.create_resource!(body: "https://www.awesomelink.com/#{rand(10000)}", story: story)
     end
   end
 end
