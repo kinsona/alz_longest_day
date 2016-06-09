@@ -1,25 +1,40 @@
-<h1>Conversation with <%= @conversation.partner(current_user.id).email %></h1>
+<div class="wrapper" id='convo-styles'>
+  <div class="container">
 
-<% @messages.each do |message| %>
+    <div class="right">
+      <div class="top"><span>To: <span class="name"><%= @conversation.partner(current_user.id).email %></span></span></div>
+      
+      <div class="chat active-chat" data-chat="person2">
+        <div class="conversation-start">
+          <span><%= @messages.last.created_at %></span>
+        </div>
 
-  <h2><%= message.user.email %></h2>
-  <p>
-    <%= message.body %><br>
-    <%= time_ago_in_words(message.created_at) %> ago
-  </p>
+        <% @messages.each do |message| %>
 
-<% end %>
+          <% if message.user.id == @current_user_id %>
+            <div class="bubble me">
+              <%= message.body %>
+            </div>
+          <% else %>
+            <div class="bubble you">
+              <%= message.body %>
+            </div>
+          <% end %>
+        <% end %>
 
+      </div>
 
-<h4>
-  Reply:
-</h4>
+      
+      <div class="write">
+        <%= form_for @new_message, class: 'form-inline' do |f| %>
+          <%= f.hidden_field :conversation_id %>
+          <div class='form-group'>
+            <%= f.text_field :body, class: 'form-control' %>
+          </div>
+          <%# f.submit 'Send!' %>
+        <% end %>
+      </div>
 
-<%= form_for @new_message do |f| %>
-  <%= f.hidden_field :conversation_id %>
-
-  <%= f.text_area :body %>
-
-  <%= f.submit 'Send!' %>
-
-<% end %>
+    </div>
+  </div>
+</div>
