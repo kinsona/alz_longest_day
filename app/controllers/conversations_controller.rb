@@ -31,7 +31,7 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = Conversation.find(params[:id])
-    @messages = @conversation.messages.where('id IS NOT NULL').order(:created_at => :desc)
+    @messages = @conversation.messages.where('id IS NOT NULL').order(:created_at)
     @new_message = @conversation.messages.build(user: current_user)
   end
 

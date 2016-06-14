@@ -1,11 +1,44 @@
-<h1>All Conversations</h1>
+<main id='conversations-index'>
 
-<% @conversations.each do |convo| %>
-  <%= link_to convo do %>
-    <h4><%= convo.messages.last.user.email %> <small><%= time_ago_in_words(convo.messages.last.created_at) %> ago</small></h4>
-    <p>
-      <%= convo.messages.last.body %>
-    </p>
-  <% end %>
-<% end %>
+  <div class='container'>
 
+
+    <div class='row'>
+      <div class='col-xs-12'>
+        <h1>Your Conversations</h1>
+      </div>
+    </div>
+
+
+    <div class='row'>
+      <div class='col-sm-10 col-sm-offset-1'>
+
+        <% @conversations.each do |convo| %>
+          <div class='row'>
+
+            <%= link_to convo do %>
+              <div class='col-xs-8'>
+                <h4><%= convo.messages.last.user.email %></h4>
+              </div>
+              <div class='col-xs-4'>
+                <p class='text-right'>
+                  <%= time_ago_in_words(convo.messages.last.created_at) %> ago
+                </p>
+              </div>
+              <div class='col-xs-12'>
+                <p>
+                  <%= convo.messages.last.body %>
+                </p>
+              </div>
+            <% end %>
+
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</main>

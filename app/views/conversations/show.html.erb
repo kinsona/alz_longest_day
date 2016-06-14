@@ -1,25 +1,48 @@
-<h1>Conversation with <%= @conversation.partner(current_user.id).email %></h1>
+<main id='conversations-show'>
 
-<% @messages.each do |message| %>
-
-  <h2><%= message.user.email %></h2>
-  <p>
-    <%= message.body %><br>
-    <%= time_ago_in_words(message.created_at) %> ago
-  </p>
-
-<% end %>
+  <div class='container'>
 
 
-<h4>
-  Reply:
-</h4>
+    <div class='row'>
+      <div class='col-sm-8 col-sm-offset-2'>
 
-<%= form_for @new_message do |f| %>
-  <%= f.hidden_field :conversation_id %>
+        <div class="panel panel-default">
+          
+          <div class="panel-heading">
+            <h3><small>To: </small><%= @conversation.partner(current_user.id).email %></h3>
+          </div>
 
-  <%= f.text_area :body %>
 
-  <%= f.submit 'Send!' %>
+          <div class="panel-body">
+            <% @messages.each do |message| %>
+              <p class='text-center message-timestamp'>
+                <%= message.created_at.strftime('%b %e, %l:%M %p') %>
+              </p>
+              <% if message.user.id == current_user.id %>
+                <p class='message-you'>
+                  <%= message.body %>
+                </p>
+              <% else %>
+                <p class='message-them'>
+                  <%= message.body %>
+                </p>
+              <% end %>
+            <% end %>
+          </div>
 
-<% end %>
+          <div class='panel-footer'>
+            <%= form_for @new_message do |f| %>
+              <%= f.hidden_field :conversation_id %>
+              <%= f.text_field :body, class: 'form-control' %>
+              <%# f.submit 'Send!' %>
+            <% end %>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</main>

@@ -4,7 +4,7 @@
         <% if current_user %>
             <%= menu_item "Home", root_path %>
             <%= menu_item "Search", '#' %>
-            <%= menu_item "Messages", '#' %>
+            <%= menu_item "Messages", conversations_path %>
             <%= drop_down "You" do %>
                 <%= menu_item "Profile", '#' %>
                 <%= menu_item "Settings", '#' %>
