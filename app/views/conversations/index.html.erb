@@ -1,21 +1,11 @@
-<div class="wrapper" id='convo-styles'>
-  <div class="container">
-    <div class="left" style="width:100%;">
-       
-      <ul class="people">
+<h1>All Conversations</h1>
 
-        <% @conversations.each do |convo| %>
-          <%= link_to convo do %>
-            <li class="person" data-chat="person1">
-              <span class="name"><b><%= convo.messages.last.user.email %></b> <i></i><br/></span>
-              <span class="time"><%= convo.messages.last.created_at %></span>
-              <span class="preview"><%= convo.messages.last.body %></span>
-            </li>
-          <% end %>
-        <% end %>
-        
-      </ul>
+<% @conversations.each do |convo| %>
+  <%= link_to convo do %>
+    <h4><%= convo.messages.last.user.email %> <small><%= time_ago_in_words(convo.messages.last.created_at) %> ago</small></h4>
+    <p>
+      <%= convo.messages.last.body %>
+    </p>
+  <% end %>
+<% end %>
 
-    </div>
-  </div>
-</div>
